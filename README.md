@@ -1,6 +1,8 @@
 # folder-sync
 
-One-way folder synchronization from tree-view. Copies new or changed files to the target and removes files that no longer exist in the source.
+One-way folder synchronization from the tree view.
+
+Copies new or changed files to the target and removes files that no longer exist in the source.
 
 ## Features
 

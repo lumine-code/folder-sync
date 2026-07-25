@@ -1,7 +1,7 @@
 {
   "name": "folder-sync",
   "author": "lumine-code",
-  "description": "One-way folder synchronization from tree-view",
+  "description": "One-way folder synchronization from the tree view.",
   "repository": "https://github.com/lumine-code/folder-sync",
   "bugs": {
     "url": "https://github.com/lumine-code/folder-sync/issues"
