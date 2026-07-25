@@ -7,9 +7,11 @@
     "url": "https://github.com/lumine-code/folder-sync/issues"
   },
   "keywords": [
-    "sync",
-    "folder",
-    "backup"
+    "backup",
+    "copy",
+    "mirror",
+    "one-way",
+    "deploy"
   ],
   "version": "1.0.0",
   "license": "MIT",
