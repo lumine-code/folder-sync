@@ -1,18 +1,28 @@
 {
   "name": "folder-sync",
-  "repository": "https://github.com/asiloisad/pulsar-folder-sync",
+  "author": "lumine-code",
   "description": "One-way folder synchronization from tree-view",
+  "repository": "https://github.com/lumine-code/folder-sync",
+  "bugs": {
+    "url": "https://github.com/lumine-code/folder-sync/issues"
+  },
   "keywords": [
     "sync",
     "folder",
     "backup"
   ],
-  "version": "0.1.4",
+  "version": "1.0.0",
   "license": "MIT",
   "engines": {
     "atom": ">=1.100.0 <2.0.0"
   },
   "main": "./lib/main",
+  "scripts": {
+    "test": "cd ../lumine && npm run test:only -- ../folder-sync/spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "configSchema": {
     "storagePath": {
       "title": "Storage Path",
@@ -32,5 +42,13 @@
         "^1.0.0": "consumeOpenExternalService"
       }
     }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.2.2",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6"
   }
 }

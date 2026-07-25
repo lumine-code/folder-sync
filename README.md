@@ -1,35 +1,35 @@
 # folder-sync
 
-One-way folder synchronization from tree-view. Copies new/changed files to target and removes files that no longer exist in source.
+One-way folder synchronization from tree-view. Copies new or changed files to the target and removes files that no longer exist in the source.
 
 ## Features
 
-- **One-way sync**: Copies only new or changed files to target.
-- **Auto cleanup**: Removes files from target that no longer exist in source.
-- **Ignore extensions**: Skip specific file types during sync.
-- **Open target**: Uses `open-external` service to open target folder.
+- **One-way sync**: copies only new or changed files to target.
+- **Auto cleanup**: removes files from target that no longer exist in source.
+- **Ignore extensions**: skip specific file types during sync.
+- **Open target**: uses the `open-external` service to open the target folder.
 
 ## Installation
 
-To install `folder-sync` run `ppm install asiloisad/pulsar-folder-sync` to install a package directly from the GitHub repository.
+To install `folder-sync` search for _folder-sync_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/folder-sync`.
 
 ## Commands
 
 Commands available in `.tree-view`:
 
-- `folder-sync:create` - create `.sync` config in selected folder
-- `folder-sync:run` - run sync using selected `.sync` file
-- `folder-sync:open` - open target folder in file manager
+- `folder-sync:create`: create a `.sync` config in the selected folder,
+- `folder-sync:run`: run sync using the selected `.sync` file,
+- `folder-sync:open`: open the target folder in the file manager.
 
 ## Usage
 
-1. Right-click a folder in tree-view and run `folder-sync:create`
-2. Edit the `.sync` config file with your target path
-3. Right-click the `.sync` file and run `folder-sync:run`
+1. Right-click a folder in tree-view and run `folder-sync:create`.
+2. Edit the `.sync` config file with your target path.
+3. Right-click the `.sync` file and run `folder-sync:run`.
 
-## Config file
+## Configuration
 
-Use `target` for absolute path:
+The `.sync` file is a JSON config. Use `target` for an absolute path:
 
 ```json
 {
@@ -38,7 +38,7 @@ Use `target` for absolute path:
 }
 ```
 
-Or use `name` with package setting `storagePath`:
+Or use `name` with the `storagePath` package setting; the target is built as `storagePath/name`:
 
 ```json
 {
@@ -47,13 +47,16 @@ Or use `name` with package setting `storagePath`:
 }
 ```
 
-Target is built as `storagePath/name`.
+Options:
 
-### Options
+- `target`: absolute destination path,
+- `name`: folder name inside `storagePath`,
+- `ignoreExts`: file extensions to ignore (optional).
 
-- `target` - absolute destination path
-- `name` - folder name inside storagePath
-- `ignoreExts` - file extensions to ignore (optional)
+## Services
+
+- **tree-view** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
+- **open-external** (`^1.0.0`): consumed to open the sync target folder in the system file manager.
 
 ## Contributing
 
