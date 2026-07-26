@@ -57,7 +57,7 @@ Options:
 
 ## Services
 
-- **tree-view** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
+- **tree-view.selection** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
 - **open-external** (`^1.0.0`): consumed to open the sync target folder in the system file manager.
 
 ## Contributing

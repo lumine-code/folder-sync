@@ -34,9 +34,9 @@
     }
   },
   "consumedServices": {
-    "tree-view": {
+    "tree-view.selection": {
       "versions": {
-        "^1.0.0": "consumeTreeView"
+        "^1.0.0": "consumeTreeViewSelection"
       }
     },
     "open-external": {
