@@ -132,7 +132,7 @@ describe("folder-sync", () => {
   describe("folder-sync:open", () => {
     it("opens the target through the open-external service", async () => {
       const openExternal = jasmine.createSpy("openExternal");
-      mainModule.consumeOpenExternalService({ openExternal });
+      mainModule.consumeOpenExternal({ openExternal });
       selected = [writeSyncConfig({ target: dstDir })];
 
       await mainModule.open();
@@ -141,7 +141,7 @@ describe("folder-sync", () => {
     });
 
     it("clears the service when the provider is disposed", () => {
-      const disposable = mainModule.consumeOpenExternalService({ openExternal() {} });
+      const disposable = mainModule.consumeOpenExternal({ openExternal() {} });
       expect(mainModule.openExternal).not.toBeNull();
       disposable.dispose();
       expect(mainModule.openExternal).toBeNull();
