@@ -1,6 +1,6 @@
 {
   "context-menu": {
-    ".tree-view-root:not(.multi-select) .file .name[data-name='.sync']": [
+    ".tree-view-root:not(.multi-select) .file[data-name=\".sync\"]": [
       { "label": "Sync Folder", "command": "folder-sync:run" },
       { "label": "Open Target", "command": "folder-sync:open" },
       { "type": "separator" }
