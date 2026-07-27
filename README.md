@@ -57,8 +57,8 @@ Options:
 
 ## Services
 
-- **[tree-view.selection](https://lumine-code.github.io/docs.html#services/tree-view.selection)** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
-- **[open-external](https://lumine-code.github.io/docs.html#services/open-external)** (`^1.0.0`): consumed to open the sync target folder in the system file manager.
+- **tree-view.selection** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
+- **open-external** (`^1.0.0`): consumed to open the sync target folder in the system file manager.
 
 ## Contributing
 
