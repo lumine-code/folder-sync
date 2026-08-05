@@ -16,7 +16,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "engines": {
-    "lumine": ">=1.100.0 <2.0.0"
+    "lumine": "^1.0.0"
   },
   "backgroundTips": [
     "You can mirror a project folder to another location with {{ 'folder-sync:open' | keystroke }}"
