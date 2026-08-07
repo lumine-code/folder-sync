@@ -17,7 +17,7 @@ To install `folder-sync` search for _folder-sync_ in the Install pane of the Lum
 
 ## Commands
 
-Commands available in `.tree-view`:
+Commands available in `atom-workspace`:
 
 - `folder-sync:create`: create a `.sync` config in the selected folder,
 - `folder-sync:run`: run sync using the selected `.sync` file,
