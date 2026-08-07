@@ -1,13 +1,32 @@
 {
   "context-menu": {
-    ".tree-view-root:not(.multi-select) .file[data-name=\".sync\"]": [
-      { "label": "Sync Folder", "command": "folder-sync:run" },
-      { "label": "Open Target", "command": "folder-sync:open" },
-      { "type": "separator" }
+    ".tree-view .full-menu:not(.multi-select) .file[data-name=\".sync\"]": [
+      {
+        "type": "separator"
+      },
+      {
+        "label": "Sync Folder",
+        "command": "folder-sync:run"
+      },
+      {
+        "label": "Open Target",
+        "command": "folder-sync:open"
+      },
+      {
+        "type": "separator"
+      }
     ],
-    ".tree-view-root:not(.multi-select) .directory": [
-      { "label": "Create .sync", "command": "folder-sync:create" },
-      { "type": "separator" }
+    ".tree-view .full-menu:not(.multi-select) .directory": [
+      {
+        "type": "separator"
+      },
+      {
+        "label": "Create .sync",
+        "command": "folder-sync:create"
+      },
+      {
+        "type": "separator"
+      }
     ]
   },
   "menu": [
@@ -17,9 +36,18 @@
         {
           "label": "Folder Sync",
           "submenu": [
-            { "label": "Create .sync", "command": "folder-sync:create" },
-            { "label": "Sync Folder", "command": "folder-sync:run" },
-            { "label": "Open Target", "command": "folder-sync:open" }
+            {
+              "label": "Create .sync",
+              "command": "folder-sync:create"
+            },
+            {
+              "label": "Sync Folder",
+              "command": "folder-sync:run"
+            },
+            {
+              "label": "Open Target",
+              "command": "folder-sync:open"
+            }
           ]
         }
       ]
