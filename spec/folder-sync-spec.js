@@ -6,9 +6,9 @@ describe("folder-sync", () => {
   let workspaceElement, mainModule, tempDir, srcDir, dstDir, selected;
 
   beforeEach(async () => {
-    workspaceElement = atom.views.getView(atom.workspace);
+    workspaceElement = lumine.views.getView(lumine.workspace);
     jasmine.attachToDOM(workspaceElement);
-    ({ mainModule } = await atom.packages.activatePackage("folder-sync"));
+    ({ mainModule } = await lumine.packages.activatePackage("folder-sync"));
 
     tempDir = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "folder-sync-spec-")));
     srcDir = path.join(tempDir, "source");
@@ -35,7 +35,7 @@ describe("folder-sync", () => {
     const treeView = document.createElement("div");
     treeView.classList.add("tree-view");
     workspaceElement.appendChild(treeView);
-    const commands = atom.commands
+    const commands = lumine.commands
       .findCommands({ target: treeView })
       .map((command) => command.name);
     expect(commands).toContain("folder-sync:create");
@@ -45,8 +45,8 @@ describe("folder-sync", () => {
 
   describe("folder-sync:create", () => {
     it("creates a .sync config named after the project root", async () => {
-      atom.project.setPaths([srcDir]);
-      selected = [atom.project.getPaths()[0]];
+      lumine.project.setPaths([srcDir]);
+      selected = [lumine.project.getPaths()[0]];
       await mainModule.create();
 
       const configPath = path.join(selected[0], ".sync");
@@ -56,13 +56,13 @@ describe("folder-sync", () => {
     });
 
     it("refuses to overwrite an existing .sync", async () => {
-      atom.project.setPaths([srcDir]);
-      selected = [atom.project.getPaths()[0]];
+      lumine.project.setPaths([srcDir]);
+      selected = [lumine.project.getPaths()[0]];
       writeSyncConfig({ name: "existing" });
-      spyOn(atom.notifications, "addError");
+      spyOn(lumine.notifications, "addError");
       await mainModule.create();
 
-      expect(atom.notifications.addError).toHaveBeenCalled();
+      expect(lumine.notifications.addError).toHaveBeenCalled();
       const config = JSON.parse(fs.readFileSync(path.join(selected[0], ".sync"), "utf8"));
       expect(config.name).toBe("existing");
     });
@@ -109,7 +109,7 @@ describe("folder-sync", () => {
     });
 
     it("builds the target from storagePath and name", async () => {
-      atom.config.set("folder-sync.storagePath", tempDir);
+      lumine.config.set("folder-sync.storagePath", tempDir);
       fs.writeFileSync(path.join(srcDir, "a.txt"), "alpha");
       selected = [writeSyncConfig({ name: "by-name" })];
 
@@ -122,11 +122,11 @@ describe("folder-sync", () => {
       const other = path.join(srcDir, "not-sync.json");
       fs.writeFileSync(other, "{}");
       selected = [other];
-      spyOn(atom.notifications, "addError");
+      spyOn(lumine.notifications, "addError");
 
       await mainModule.run();
 
-      expect(atom.notifications.addError).toHaveBeenCalled();
+      expect(lumine.notifications.addError).toHaveBeenCalled();
       expect(fs.existsSync(dstDir)).toBe(false);
     });
   });
