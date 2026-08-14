@@ -13,7 +13,7 @@ Copies new or changed files to the target and removes files that no longer exist
 
 ## Installation
 
-To install `folder-sync` search for _folder-sync_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/folder-sync`.
+To install `folder-sync` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/folder-sync`.
 
 ## Commands
 
@@ -57,8 +57,8 @@ Options:
 
 ## Services
 
-- **tree-view.selection** (`^1.0.0`): consumed to read the selected entries that the commands operate on.
-- **open-external** (`^1.0.0`): consumed to open the sync target folder in the system file manager.
+- `tree-view.selection`: consumed to read the selected entries that the commands operate on.
+- `open-external`: consumed to open the sync target folder in the system file manager.
 
 ## Contributing
 
