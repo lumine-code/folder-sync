@@ -69,6 +69,99 @@ describe("folder-sync", () => {
   });
 
   describe("folder-sync:run", () => {
+    for (const target of ["same", "ancestor", "new-child", "existing-child"]) {
+      it(`refuses a ${target} target before copying or deleting anything`, async () => {
+        const targetPath =
+          target === "same"
+            ? srcDir
+            : target === "ancestor"
+              ? tempDir
+              : path.join(srcDir, "backup");
+        if (target === "existing-child") fs.mkdirSync(targetPath);
+        const sourceFile = path.join(srcDir, "keep.txt");
+        fs.writeFileSync(sourceFile, "keep");
+        selected = [writeSyncConfig({ target: targetPath })];
+        spyOn(mainModule, "syncDir");
+        spyOn(mainModule, "deleteExtras");
+        spyOn(lumine.notifications, "addError");
+
+        await mainModule.run();
+
+        expect(mainModule.syncDir).not.toHaveBeenCalled();
+        expect(mainModule.deleteExtras).not.toHaveBeenCalled();
+        expect(lumine.notifications.addError).toHaveBeenCalledWith("Sync failed", {
+          detail: "Source and target folders must be separate; neither can contain the other.",
+        });
+        expect(fs.readFileSync(sourceFile, "utf8")).toBe("keep");
+        if (target === "new-child") expect(fs.existsSync(targetPath)).toBe(false);
+      });
+    }
+
+    it("resolves symlink ancestors before checking a new target", async () => {
+      const aliasPath = path.join(tempDir, "source-alias");
+      fs.symlinkSync(srcDir, aliasPath, process.platform === "win32" ? "junction" : "dir");
+      const targetPath = path.join(aliasPath, "new", "backup");
+      selected = [writeSyncConfig({ target: targetPath })];
+      spyOn(mainModule, "syncDir");
+      spyOn(mainModule, "deleteExtras");
+      spyOn(lumine.notifications, "addError");
+
+      await mainModule.run();
+
+      expect(mainModule.syncDir).not.toHaveBeenCalled();
+      expect(mainModule.deleteExtras).not.toHaveBeenCalled();
+      expect(lumine.notifications.addError).toHaveBeenCalled();
+      expect(fs.existsSync(targetPath)).toBe(false);
+    });
+
+    it("allows a sibling whose name starts with the source folder name", async () => {
+      const targetPath = `${srcDir}-backup`;
+      fs.writeFileSync(path.join(srcDir, "keep.txt"), "keep");
+      selected = [writeSyncConfig({ target: targetPath })];
+
+      await mainModule.run();
+
+      expect(fs.readFileSync(path.join(targetPath, "keep.txt"), "utf8")).toBe("keep");
+    });
+
+    it("refuses a nested target junction before writing outside the target", async () => {
+      const outsideDir = path.join(tempDir, "outside");
+      fs.mkdirSync(outsideDir);
+      const outsideFile = path.join(outsideDir, "keep.txt");
+      fs.writeFileSync(outsideFile, "original");
+      fs.mkdirSync(path.join(srcDir, "nested"));
+      fs.writeFileSync(path.join(srcDir, "nested", "keep.txt"), "replacement");
+      fs.mkdirSync(dstDir);
+      fs.symlinkSync(
+        outsideDir,
+        path.join(dstDir, "nested"),
+        process.platform === "win32" ? "junction" : "dir",
+      );
+      selected = [writeSyncConfig({ target: dstDir })];
+      spyOn(mainModule, "syncDir");
+      spyOn(mainModule, "deleteExtras");
+      spyOn(lumine.notifications, "addError");
+
+      await mainModule.run();
+
+      expect(mainModule.syncDir).not.toHaveBeenCalled();
+      expect(mainModule.deleteExtras).not.toHaveBeenCalled();
+      expect(lumine.notifications.addError).toHaveBeenCalled();
+      expect(fs.readFileSync(outsideFile, "utf8")).toBe("original");
+    });
+
+    it("allows a top-level target alias to a separate directory", async () => {
+      fs.mkdirSync(dstDir);
+      const aliasPath = path.join(tempDir, "target-alias");
+      fs.symlinkSync(dstDir, aliasPath, process.platform === "win32" ? "junction" : "dir");
+      fs.writeFileSync(path.join(srcDir, "keep.txt"), "keep");
+      selected = [writeSyncConfig({ target: aliasPath })];
+
+      await mainModule.run();
+
+      expect(fs.readFileSync(path.join(dstDir, "keep.txt"), "utf8")).toBe("keep");
+    });
+
     it("copies new files to the target", async () => {
       fs.writeFileSync(path.join(srcDir, "a.txt"), "alpha");
       fs.mkdirSync(path.join(srcDir, "nested"));
