@@ -124,6 +124,43 @@ describe("folder-sync", () => {
       expect(fs.readFileSync(path.join(targetPath, "keep.txt"), "utf8")).toBe("keep");
     });
 
+    it("resolves parent traversal after a junction before checking containment", async () => {
+      fs.mkdirSync(path.join(srcDir, "nested"));
+      fs.mkdirSync(dstDir);
+      const aliasPath = path.join(dstDir, "source-alias");
+      fs.symlinkSync(
+        path.join(srcDir, "nested"),
+        aliasPath,
+        process.platform === "win32" ? "junction" : "dir",
+      );
+      const parentTraversal = `${aliasPath}${path.sep}..`;
+      const physicalParent = await fs.promises.realpath(parentTraversal);
+      const physicalSource = await fs.promises.realpath(srcDir);
+      selected = [writeSyncConfig({ target: `${parentTraversal}${path.sep}backup` })];
+      spyOn(mainModule, "syncDir");
+      spyOn(mainModule, "deleteExtras");
+      spyOn(lumine.notifications, "addError");
+
+      await mainModule.run();
+
+      // Windows resolves junction/.. before following the junction; POSIX
+      // resolves it afterwards. Validate against the platform's real target.
+      if (physicalParent === physicalSource) {
+        expect(mainModule.syncDir).not.toHaveBeenCalled();
+        expect(mainModule.deleteExtras).not.toHaveBeenCalled();
+        expect(lumine.notifications.addError).toHaveBeenCalledWith("Sync failed", {
+          detail: "Source and target folders must be separate; neither can contain the other.",
+        });
+      } else {
+        expect(mainModule.syncDir).toHaveBeenCalledWith(
+          physicalSource,
+          path.join(physicalParent, "backup"),
+          [],
+        );
+        expect(lumine.notifications.addError).not.toHaveBeenCalled();
+      }
+    });
+
     it("refuses a nested target junction before writing outside the target", async () => {
       const outsideDir = path.join(tempDir, "outside");
       fs.mkdirSync(outsideDir);
