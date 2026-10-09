@@ -86,4 +86,21 @@ describe("Folder sync mirror entries", () => {
     expect(fs.readFileSync(log, "utf8")).toBe("private log");
     expect(lumine.notifications.addError).toHaveBeenCalled();
   });
+
+  it("keeps target data when a source symlink points to a directory", async () => {
+    const outside = path.join(root, "outside");
+    fs.mkdirSync(outside);
+    fs.symlinkSync(
+      outside,
+      path.join(source, "entry"),
+      process.platform === "win32" ? "junction" : "dir",
+    );
+    fs.mkdirSync(path.join(target, "entry"));
+    const kept = path.join(target, "entry", "keep.txt");
+    fs.writeFileSync(kept, "target data");
+    await main.run();
+    expect(fs.existsSync(kept)).toBe(true);
+    if (fs.existsSync(kept)) expect(fs.readFileSync(kept, "utf8")).toBe("target data");
+    expect(lumine.notifications.addError).toHaveBeenCalled();
+  });
 });
