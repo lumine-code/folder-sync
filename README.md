@@ -11,6 +11,8 @@ Copies new or changed files to the target and removes files that no longer exist
 - **Ignore extensions**: skip specific file types during sync.
 - **Open target**: uses the `open-external` service to open the target folder.
 
+![Synchronize a sample folder and see the result in the editor.](.github/demo.png)
+
 ## Installation
 
 To install `folder-sync` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/folder-sync`.

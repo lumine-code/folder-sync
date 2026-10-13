@@ -1,0 +1,17 @@
+{
+  "title": "folder-sync",
+  "description": "Synchronize a sample folder and see the result in the editor.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "d5b19838e0fb5195bcc0eaee417e7c52e2aec7c1",
+  "mode": "normal",
+  "fontSettings": "default",
+  "themeSourceRevision": "6564a9e21899b5541e9c8f8006f9be6d6d72e6ad",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "Synchronize a sample folder and see the result in the editor.",
+      "width": 1150,
+      "height": 520
+    }
+  ]
+}
