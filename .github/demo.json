@@ -2,8 +2,8 @@
   "title": "folder-sync",
   "description": "Synchronize a sample folder and see the result in the editor.",
   "recordedOn": "2026-10-14",
-  "sourceRevision": "7bc29350dced211274a6fbe846d3480ceca4f9f8",
-  "themeSourceRevision": "7fbd047a87ecf1367c896b19ff270cdc28d319f7",
+  "sourceRevision": "8e6ba63cecd1e0e5892fc40de9aedaf403e15665",
+  "themeSourceRevision": "a673daf5882dc988419316d144a9bbe0aec9cb53",
   "mode": "normal",
   "fontSettings": "default",
   "scenario": "demo.js",
@@ -11,8 +11,8 @@
   "environment": {
     "platform": "win32",
     "arch": "x64",
-    "electron": "44.7.0",
-    "chrome": "152.0.7977.130",
+    "electron": "44.7.1",
+    "chrome": "152.0.7977.149",
     "devicePixelRatio": 1,
     "locale": "en-GB",
     "fontFamily": "Fira Code, Menlo, DejaVu Sans Mono, Consolas, monospace",
@@ -21,39 +21,40 @@
   },
   "viewport": { "width": 1150, "height": 520 },
   "cornerRadius": 10,
+  "privacy": { "version": 1, "location": "neutral", "textChecked": true },
   "sources": {
     "editor": {
-      "revision": "ca7198ebc05410bb29a14259434e77c94a714b24",
+      "revision": "b3fcd05714f72e3aa88498c47334a04de2c51afa",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "package": {
-      "revision": "7bc29350dced211274a6fbe846d3480ceca4f9f8",
+      "revision": "8e6ba63cecd1e0e5892fc40de9aedaf403e15665",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "folder-sync": {
-      "revision": "7bc29350dced211274a6fbe846d3480ceca4f9f8",
+      "revision": "8e6ba63cecd1e0e5892fc40de9aedaf403e15665",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "language-json": {
-      "revision": "0df16be15c8825aa71fcdfd96edb01db605c588f",
+      "revision": "25a53940e0ef145dfd0723a2b2d23096ddb536f3",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "notifications": {
-      "revision": "946a22b2231f210ee7609bbb7a5200582c18cdae",
+      "revision": "2e513033fbd3942ecee32b29daa042e056baec13",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "one-theme": {
-      "revision": "7fbd047a87ecf1367c896b19ff270cdc28d319f7",
+      "revision": "a673daf5882dc988419316d144a9bbe0aec9cb53",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "tree-view": {
-      "revision": "fe6f35de06f036837aa9c2d3b138b3d72557bcc4",
+      "revision": "aaa932b9f685f7514a5015d3b54079c45057475d",
       "dirty": false,
       "workingTreeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
@@ -78,7 +79,7 @@
       "label": "Synchronize a sample folder and see the result in the editor.",
       "width": 1150,
       "height": 520,
-      "sha256": "b2e519a247e144abcaca4b477b513445ae7ec5feae0be0ae5efb70510fcbd081"
+      "sha256": "25afc3ce8b8121329598b9201c940f7f11076988da8bdc2f7d43649d8a963529"
     }
   ]
 }
