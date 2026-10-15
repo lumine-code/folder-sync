@@ -1,4 +1,28 @@
 {
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Folder Sync",
+          "submenu": [
+            {
+              "label": "Create .sync File",
+              "command": "folder-sync:create"
+            },
+            {
+              "label": "Sync Folder",
+              "command": "folder-sync:run"
+            },
+            {
+              "label": "Open Target Folder",
+              "command": "folder-sync:open"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "context-menu": {
     ".tree-view .full-menu:not(.multi-select) .file[data-name=\".sync\"]": [
       {
@@ -21,22 +45,26 @@
           "tree-view:remove",
           "tree-view:add-file"
         ],
-        "command": "folder-sync:run"
+        "command": "folder-sync:run",
+        "group": "tools",
+        "order": 40
       },
       {
-        "label": "Open Target",
-        "command": "folder-sync:open"
+        "label": "Open Target Folder",
+        "command": "folder-sync:open",
+        "group": "tools",
+        "order": 50
       },
       {
         "type": "separator"
       }
     ],
-    ".tree-view .full-menu:not(.multi-select) .directory": [
+    ".tree-view .full-menu:not(.multi-select) .directory > .list-item": [
       {
         "type": "separator"
       },
       {
-        "label": "Create .sync",
+        "label": "Create .sync File",
         "afterGroupContaining": [
           {
             "id": "terminal:tree-context"
@@ -52,35 +80,13 @@
           "tree-view:remove",
           "tree-view:add-file"
         ],
-        "command": "folder-sync:create"
+        "command": "folder-sync:create",
+        "group": "tools",
+        "order": 40
       },
       {
         "type": "separator"
       }
     ]
-  },
-  "menu": [
-    {
-      "label": "Packages",
-      "submenu": [
-        {
-          "label": "Folder Sync",
-          "submenu": [
-            {
-              "label": "Create .sync",
-              "command": "folder-sync:create"
-            },
-            {
-              "label": "Sync Folder",
-              "command": "folder-sync:run"
-            },
-            {
-              "label": "Open Target",
-              "command": "folder-sync:open"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  }
 }
