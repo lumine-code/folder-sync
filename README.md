@@ -19,7 +19,7 @@ To install `folder-sync` search for it in the Install pane of the Lumine setting
 
 ## Commands
 
-Commands available in `lumine-workspace`:
+Commands available in `.tree-view`:
 
 - `folder-sync:create`: create a `.sync` config in the selected folder,
 - `folder-sync:run`: run sync using the selected `.sync` file,

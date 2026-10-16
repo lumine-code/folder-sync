@@ -43,6 +43,21 @@ describe("folder-sync", () => {
     expect(commands).toContain("folder-sync:open");
   });
 
+  it("does not synchronize a stale tree selection from another focused surface", async () => {
+    selected = [writeSyncConfig({ target: dstDir })];
+    spyOn(mainModule, "run").and.resolveTo();
+    expect(lumine.commands.canDispatch(workspaceElement, "folder-sync:run")).toBe(false);
+    const tree = document.createElement("div");
+    tree.className = "tree-view";
+    workspaceElement.appendChild(tree);
+    expect(lumine.commands.canDispatch(tree, "folder-sync:run")).toBe(true);
+
+    await lumine.commands.dispatch(workspaceElement, "folder-sync:run");
+    expect(mainModule.run).not.toHaveBeenCalled();
+    await lumine.commands.dispatch(tree, "folder-sync:run");
+    expect(mainModule.run).toHaveBeenCalledTimes(1);
+  });
+
   describe("folder-sync:create", () => {
     it("creates a .sync config named after the project root", async () => {
       lumine.project.setPaths([srcDir]);
