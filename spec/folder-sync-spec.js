@@ -16,7 +16,10 @@ describe("folder-sync", () => {
     fs.mkdirSync(srcDir, { recursive: true });
 
     selected = [];
-    mainModule.consumeTreeViewSelection({ selectedPaths: () => selected });
+    mainModule.consumeTreeViewSelection({
+      selectedPaths: () => selected,
+      getSelectionSnapshot: () => ({ entries: selected.map((path) => ({ path, kind: "file" })) }),
+    });
   });
 
   afterEach(() => {
