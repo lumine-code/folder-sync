@@ -1,5 +1,5 @@
 {
-  "target": "../sync-output",
+  "name": "sync-output",
   "ignoreExts": [
     "log"
   ]
